@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <h2 class="text-center">This is page about plants information</h2>
+        <div class="plants-container">
+            {% for pl in plante %}
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{ pl.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ pl.location }}</h6>
+{#                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>#}
+{#                <a href="/delete-plant/{{ pl.id }}" class="card-link">Delete</a>#}
+{#                <a href="/plant-info/{{ pl.id }}" class="card-link">Information</a>#}
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

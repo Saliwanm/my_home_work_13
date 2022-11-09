@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+{#        <form action="/add-employee" method="POST">#}
+        <form {% if employee %} action="/update-employee/{{ employee.id }}" {% else %} action="/add-employee" {% endif %} method="POST">
+            <div class="mb-3">
+              <label for="first_name" class="form-label">First Name:</label>
+              <input type="text" name="first_name" class="form-control" id="first_name" {% if employee %} value="{{ employee.first_name }}" {% endif %} placeholder="Employee first name">
+            </div>
+
+            <div class="mb-3">
+              <label for="last_name" class="form-label">Last name:</label>
+              <input type="text" name="last_name" class="form-control" id="last_name" {% if employee %} value="{{ employee.last_name }}" {% endif %} placeholder="Employee last name">
+            </div>
+
+            <select class="form-select form-select-lg mb-3" name="plant_id" aria-label="multiple select example">
+                {% for plant in plants %}
+                    <option value="{{ plant.id }}">{{ plant.title }}</option>
+                {% endfor %}
+            </select>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">@</span>
+              <input type="email" class="form-control" name="email" placeholder="Email" {% if employee %} value="{{ employee.email }}" {% endif %} aria-label="Email" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary mb-3">Submit</button>
+            </div>
+
+        </form>
+    </div>
+{% endblock %}
