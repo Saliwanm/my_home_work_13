@@ -32,13 +32,13 @@ class PlantsResource(Resource):
         db.session.commit()
         return plant.serialize_plant()
 
-    def delete(self):
-        data = request.json
-        print(data['id'])
-        plant = PlantModel.query.get(data['id'])
-        db.session.delete(plant)
-        db.session.commit()
-        return "This plant delete"
+    # def delete(self):
+    #     data = request.json
+    #     print(data['id'])
+    #     plant = PlantModel.query.get(data['id'])
+    #     db.session.delete(plant)
+    #     db.session.commit()
+    #     return "This plant delete"
 
 
 class SinglePlantResource(Resource):
@@ -54,6 +54,17 @@ class SinglePlantResource(Resource):
         db.session.add(plant)
         db.session.commit()
         return plant.serialize_plant()
+
+    def delete(self, id):
+        plant = PlantModel.query.get(id)
+        print(plant)
+        if plant:
+            db.session.delete(plant)
+            db.session.commit()
+            print(plant.title, plant.location, plant.id, sep='\n')
+            return f"Plant with id = {id} was deleteed"
+        else:
+            return "This plant do not exist"
 
 
 api.add_resource(PlantsResource, '/api/v1/plants')
